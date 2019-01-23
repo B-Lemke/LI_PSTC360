@@ -1,6 +1,6 @@
 <html>
   <head>
-    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <script src="components.js"></script>
   </head>
   <body>
@@ -11,12 +11,29 @@
       <a-assets timeout="60000">
         <video id="welcome" autoplay loop="true" style="display:none" crossorigin="anonymous" playsinline webkit-playsinline src="https://cdn.glitch.com/60169fa8-5b1e-4019-8cfa-adaccde77927%2Flobby.mp4?1548177619777">
         </video>
-        <img id ="lobbyPic" src="/assets/images/lobby.jpg" />
+        <img id ="lobbyPic" crossorigin="anonymous" src="https://cdn.glitch.com/e6d5e1d7-447c-4736-8b9d-dac20809248a%2Flobby.jpg?1548257133055" />
+        <img id ="churchPic" crossorigin="anonymous" src="https://cdn.glitch.com/e6d5e1d7-447c-4736-8b9d-dac20809248a%2F360.jpg?1548257133094" />
+        <img id ="streetPic" crossorigin="anonymous" src="https://cdn.glitch.com/e6d5e1d7-447c-4736-8b9d-dac20809248a%2F3602.jpg?1548257133339" />
       </a-assets>
 
-      
-
       <a-sky src="#welcome" rotation="0 -130 0"></a-sky>
+
+      <a-camera wasd-controls-enabled="false"></a-camera>
+
+
+      
+      <a-sphere src="#churchPic" position="-6.9 1.8 -11.4"></a-sphere>
+      <a-plane position="-6.3 0.45 -10.5" rotation="0 30 0" scale="2 .7 1" color="#222222"></a-plane>
+      <a-text value="Church" position="-7 .5 -10" rotation="0 30 0" width="12" height="-3.55"></a-text>
+
+      <a-sphere src="#lobbyPic" position="-2.1 1.8 -12"></a-sphere>
+      <a-plane position="-1.8 0.45 -10.5" rotation="0 15 0" scale="2 .7 1" color="#222222"></a-plane>
+      <a-text value="Lobby" position="-2.5 0.5 -10.0" rotation="0 15 0" width="12" height="-3.55"></a-text>
+    
+      <a-sphere src="#streetPic" position="3.2 1.8 -11"></a-sphere>
+      <a-plane position="3.1 0.45 -10.5" rotation="0 -15 0" scale="2 .7 1" color="#222222"></a-plane>
+      <a-text value="Street" position="2.2 0.5 -10.0" rotation="0 -15 0" width="12" height="-3.55"></a-text>
+
 
 
     </a-scene>
