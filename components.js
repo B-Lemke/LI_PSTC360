@@ -23,7 +23,7 @@ AFRAME.registerComponent('location', {
     */
 
 
-    
+
     //Initial creation of the mesh
     init: function(){
         var data = this.data;
@@ -45,38 +45,50 @@ AFRAME.registerComponent('location', {
         console.log(data.signText);
         console.log(this.sphereMesh.position);
 
-        console.log("making geometry");
         //Create geometry for plane
         this.planeGeometry = new THREE.PlaneGeometry( 2, .8, 32 );
 
-        console.log("making material");
         //Create material for plane
         this.planeMaterial = new THREE.MeshStandardMaterial({color:"#000000"});
 
-        console.log("making mesh");
         //Create mesh for plane
         this.planeMesh = new THREE.Mesh(this.planeGeometry, this.plane);
 
-        console.log("adjusting position");
         //adjust the position
         this.planeMesh.position.set(data.positionX+data.xShift,data.positionY-1.4,data.positionZ+1+data.zShift);
         this.planeMesh.rotateY(THREE.Math.degToRad(data.yPlaneRotation));
         
         var newPlane = document.createElement('a-entity');
-
+        
         //set mesh on entity
         el.setObject3D('mesh', this.sphereMesh);
         newPlane.setObject3D('mesh', this.planeMesh)
+        
 
         //Give the entity a class we can refer to it by later
         newPlane.setAttribute("class", "navigationPlane");
-
-
         console.log(newPlane);
- 
+        sceneEl.appendChild(newPlane);
     
 
-        sceneEl.appendChild(newPlane);
+        //Create the text and set its attributes
+        var rotationValue = "0 " + data.yPlaneRotation + " 0";
+        console.log(rotationValue);
+
+        var positionValue = String(data.positionX + data.xShift) + " " +  String(data.positionY -1.4) + " " + String(data.positionZ+1.1+data.zShift);
+        console.log(positionValue)
+        var newText = document.createElement('a-entity');
+
+        newText.setAttribute("text", {"value": data.signText,
+                                    "width": 10,
+                                    "height": 10,
+                                    "align": "center"
+                                    });
+        newText.setAttribute("class", "navigationText");
+        newText.setAttribute("position", positionValue)
+        newText.setAttribute("rotation", rotationValue);
+        sceneEl.appendChild(newText);
+        console.log(newText);
     },
 
 
