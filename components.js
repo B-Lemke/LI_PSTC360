@@ -1,35 +1,82 @@
 AFRAME.registerComponent('location', {
     //Define the schema for the box    
     schema: {
-        signText: {type: 'string'},
-        YRotation: {type: 'number', default: 0},
+        positionX: {type: 'number'},
+        positionY: {type: 'number'},
+        positionZ: {type: 'number'},
         image360: {type: 'map'},
-        video360: {type: 'selector'}
+        video360: {type: 'selector'},
+        signText: {type: 'string'},
+        yPlaneRotation: {type: 'number', default: 0},
+        xShift: {type: 'number', default: .5},
+        zShift: {type: 'number', default: 0}
     },
 
+    /*
+    positionX, Y, and Z are used to position the Sphere in space on the plane
+    image360 is a map of the image that will be projected onto the sphere
+    video360 is a selector that points to the video that is loaded in the assets. This is the video that should be loaded and played once this sphere is clicked on
+    signText is the text that will appear below the sphere and infront of the plane. It should read the name of the location that will be visited
+    yPlaneRotation is used to adjusted the rotation of the planes in 3D space
+    xShift is used to move the planes relative to their spheres
+    zShift is also used to move the planes relative to their spheres, but should not be used unless the desied result cannot be achieved using xShift alone.
+    */
+
+
+    
     //Initial creation of the mesh
     init: function(){
         var data = this.data;
         var el = this.el;
+        var sceneEl = document.querySelector('a-scene');
 
+        //Create geometry for sphere
+        this.sphereGeometry = new THREE.SphereBufferGeometry( 1, 32, 32 );
 
-        //Create geometry
-        this.geometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
-
-        console.log(data.image360);
-
-
-        //Create material
+        //Create material for sphere
         texture = new THREE.TextureLoader().load(data.image360.src);
-        this.material = new THREE.MeshBasicMaterial( { map: texture } );
+        this.sphereMaterial = new THREE.MeshBasicMaterial( { map: texture } );
+
+        //Create mesh for sphere
+        this.sphereMesh = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial);
+        this.sphereMesh.position.set(data.positionX,data.positionY,data.positionZ);
 
 
+        console.log(data.signText);
+        console.log(this.sphereMesh.position);
 
-        //Create mesh
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
+        console.log("making geometry");
+        //Create geometry for plane
+        this.planeGeometry = new THREE.PlaneGeometry( 2, .8, 32 );
+
+        console.log("making material");
+        //Create material for plane
+        this.planeMaterial = new THREE.MeshStandardMaterial({color:"#000000"});
+
+        console.log("making mesh");
+        //Create mesh for plane
+        this.planeMesh = new THREE.Mesh(this.planeGeometry, this.plane);
+
+        console.log("adjusting position");
+        //adjust the position
+        this.planeMesh.position.set(data.positionX+data.xShift,data.positionY-1.4,data.positionZ+1+data.zShift);
+        this.planeMesh.rotateY(THREE.Math.degToRad(data.yPlaneRotation));
+        
+        var newPlane = document.createElement('a-entity');
 
         //set mesh on entity
-        el.setObject3D('mesh', this.mesh);
+        el.setObject3D('mesh', this.sphereMesh);
+        newPlane.setObject3D('mesh', this.planeMesh)
+
+        //Give the entity a class we can refer to it by later
+        newPlane.setAttribute("class", "navigationPlane");
+
+
+        console.log(newPlane);
+ 
+    
+
+        sceneEl.appendChild(newPlane);
     },
 
 
