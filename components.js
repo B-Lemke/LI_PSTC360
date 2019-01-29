@@ -89,6 +89,21 @@ AFRAME.registerComponent('location', {
         newText.setAttribute("rotation", rotationValue);
         sceneEl.appendChild(newText);
         console.log(newText);
+
+
+
+        //Event listeners for controller interaction
+        el.addEventListener('mouseenter', function (evt) {
+            el.setAttribute('radius', 1.5);
+          });
+
+        el.addEventListener('mouseleave', function (evt) {
+            el.setAttribute('radius', 1);
+        });
+
+        el.addEventListener('click', function (evt) {
+            el.setAttribute('material', 'color', '#EF2D5E');
+        });
     },
 
 
