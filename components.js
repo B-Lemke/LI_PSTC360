@@ -91,18 +91,22 @@ AFRAME.registerComponent('location', {
         console.log(newText);
 
 
+        var self = this;
+        var sky = document.querySelector('a-sky');
 
         //Event listeners for controller interaction
-        el.addEventListener('mouseenter', function (evt) {
+        el.addEventListener('triggerdown', function (evt) {
             el.setAttribute('radius', 1.5);
           });
 
-        el.addEventListener('mouseleave', function (evt) {
-            el.setAttribute('radius', 1);
+        el.addEventListener('mouseenter', function (evt) {
+            el.setAttribute('radius', 1.5);
         });
 
         el.addEventListener('click', function (evt) {
-            el.setAttribute('material', 'color', '#EF2D5E');
+            sky.setAttribute('src', self.data.video360.src);
+            sky.setAttribute('color', "#FFFFFF");
+            console.log(self.data.video360);
         });
     },
 

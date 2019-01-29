@@ -17,23 +17,24 @@
         <img id ="streetPic" crossorigin="anonymous" src="https://cdn.glitch.com/e6d5e1d7-447c-4736-8b9d-dac20809248a%2F3602.jpg?1548257133339" />
       </a-assets>
 
-      <a-sky  rotation="0 -130 0"></a-sky>
+      <a-sky rotation="0 -130 0" color="#666666"></a-sky>
+
 
       <a-camera wasd-controls-enabled="false"></a-camera>
-      <a-entity environment="preset: starry"></a-entity>
+    
       
-      <a-entity windows-motion-controls></a-entity>
+
       <a-entity windows-motion-controls laser-controls="hand: right" raycaster="objects: .locationSphere"></a-entity>
-
-      <a-sphere position="10 5 -3" event-trigger_down="_event: mouseenter; color: #FFFFFF"></a-sphere>
       
-      <a-entity class="locationSphere" location="image360: #churchPic; positionX: -6.9; positionY: 1.8; positionZ: -11.4; signText: Church; yPlaneRotation: 30; xShift: .6; zShift: -.2;"></a-entity>
+      <a-entity class="locationSphere" location="image360: #churchPic; video360: #churchPic; positionX: -6.9; positionY: 1.8; positionZ: -11.4; signText: Church; yPlaneRotation: 30; xShift: .6; zShift: -.2;"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #churchPic; positionX: -6.9; positionY: 5.8; positionZ: -11.4; signText: Church2; yPlaneRotation: 30; xShift: .6; zShift: -.2;"></a-entity>
+      <a-entity class="locationSphere" location="image360: #churchPic; video360: #churchPic; positionX: -6.9; positionY: 5.8; positionZ: -11.4; signText: Church2; yPlaneRotation: 30; xShift: .6; zShift: -.2;"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #lobbyPic; positionX: -1.9; positionY: 1.8; positionZ: -12; signText: Lobby; yPlaneRotation: 5; xShift: 0.25"></a-entity>
+      <a-entity class="locationSphere" location="image360: #lobbyPic; video360: #welcome; positionX: -1.9; positionY: 1.8; positionZ: -12; signText: Lobby; yPlaneRotation: 5; xShift: 0.25"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #streetPic; positionX: 3.2; positionY: 1.8; positionZ: -11; signText: Street; yPlaneRotation: -15; xShift: -.2"></a-entity>
+      <a-entity class="locationSphere" location="image360: #streetPic; video360: #streetPic; positionX: 3.2; positionY: 1.8; positionZ: -11; signText: Street; yPlaneRotation: -15; xShift: -.2"></a-entity>
+
+ 
 
     </a-scene>
   </body>
