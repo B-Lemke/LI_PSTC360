@@ -7,34 +7,46 @@
   <body>
     <a-scene>
 
-
-
-      <a-assets timeout="10000">
-        <video id="welcome" autoplay loop="true" style="display:none" crossorigin="anonymous" playsinline webkit-playsinline src="https://cdn.glitch.com/60169fa8-5b1e-4019-8cfa-adaccde77927%2Flobby.mp4?1548177619777">
+      <a-assets timeout="30000">
+        <video id="welcome" loop="true" style="display:none" crossorigin="anonymous" playsinline webkit-playsinline src="https://cdn.glitch.com/60169fa8-5b1e-4019-8cfa-adaccde77927%2Flobby.mp4?1548177619777">
         </video>
+        <video id="gunrange" loop="true" style="display:none" crossorigin="anonymous" playsinline webkit-playsinline src="assets/video/gunrange.mp4">
+        </video>
+        <video id="ambulance" loop="true" style="display:none" crossorigin="anonymous" playsinline webkit-playsinline src="assets/video/ambulance.mp4">
+        </video>
+
         <img id ="lobbyPic" crossorigin="anonymous" src="https://cdn.glitch.com/e6d5e1d7-447c-4736-8b9d-dac20809248a%2Flobby.jpg?1548257133055" />
         <img id ="churchPic" crossorigin="anonymous" src="https://cdn.glitch.com/e6d5e1d7-447c-4736-8b9d-dac20809248a%2F360.jpg?1548257133094" />
         <img id ="streetPic" crossorigin="anonymous" src="https://cdn.glitch.com/e6d5e1d7-447c-4736-8b9d-dac20809248a%2F3602.jpg?1548257133339" />
-      </a-assets>
 
-      <a-sky rotation="0 -130 0" color="#666666"></a-sky>
+        <img id ="homeIcon" crossorigin="anonymous" src="assets/images/icons/home_light.png" />
+      </a-assets>
 
 
       <a-camera wasd-controls-enabled="false"></a-camera>
     
+      <a-entity windows-motion-controls laser-controls="hand: right" raycaster="objects: .locationSphere, .homebutton"></a-entity>
       
 
-      <a-entity windows-motion-controls laser-controls="hand: right" raycaster="objects: .locationSphere"></a-entity>
-      
+      <a-sky rotation="0 -130 0" color="#666666"></a-sky>
+
+
+
       <a-entity class="locationSphere" location="image360: #churchPic; video360: #churchPic; positionX: -6.9; positionY: 1.8; positionZ: -11.4; signText: Church; yPlaneRotation: 30; xShift: .6; zShift: -.2;"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #churchPic; video360: #churchPic; positionX: -6.9; positionY: 5.8; positionZ: -11.4; signText: Church2; yPlaneRotation: 30; xShift: .6; zShift: -.2;"></a-entity>
+      <a-entity class="locationSphere" location="image360: #churchPic; video360: #gunrange; positionX: -6.9; positionY: 5.8; positionZ: -11.4; signText: Gun Range; planeWidth: 2.4; yPlaneRotation: 30; xShift: .6; zShift: -.2;"></a-entity>
 
       <a-entity class="locationSphere" location="image360: #lobbyPic; video360: #welcome; positionX: -1.9; positionY: 1.8; positionZ: -12; signText: Lobby; yPlaneRotation: 5; xShift: 0.25"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #streetPic; video360: #streetPic; positionX: 3.2; positionY: 1.8; positionZ: -11; signText: Street; yPlaneRotation: -15; xShift: -.2"></a-entity>
+      <a-entity class="locationSphere" location="image360: #streetPic; video360: #ambulance; positionX: 3.2; positionY: 1.8; positionZ: -11; signText: Ambulance; planeWidth: 2.4; yPlaneRotation: -15;  xShift: -.2"></a-entity>
 
- 
+      <a-entity class="homebutton" homebutton="image: #homeIcon;  positionX: 10.2; positionY: 1.8; positionZ: -11; signText: Home; yPlaneRotation: -50; xShift: -1"></a-entity>
+
+      <a-plane rotation="-90 0 0" material="color:#b5af9b" scale="2.5 1.5 1" height="30" width="30" id="ground"></a-plane>
+
+      <a-sphere id="homeBackground" material="color:#6b0014;side:back" scale="15 15 15"></a-sphere>
+      
+
 
     </a-scene>
   </body>

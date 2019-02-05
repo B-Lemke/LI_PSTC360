@@ -1,0 +1,13 @@
+Wishlist of features:
+
+-Stop videos from playing when home button is clicked.
+-Set source of the sky to be nothing when the home button is clicked.
+-Multi device support
+    -Headsets
+    -Browser
+    -Cardboard
+-More Scenes
+-Allow the home button to be moved around by storing coordinates for it in the location sphere component if requested
+-Sound Control
+-Hover Animations with spheres
+-Animations on click
