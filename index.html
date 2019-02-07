@@ -2,6 +2,7 @@
   <head>
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="components.js"></script>
+    <script src="aframe-animation-component.min.js"></script>
   </head>
   <body>
     <a-scene>
@@ -37,15 +38,16 @@
 
       <a-camera wasd-controls-enabled="false"></a-camera>
     
+      <a-entity windows-motion-controls laser-controls="hand: left" raycaster="objects: .locationSphere, .homebutton"></a-entity>
       <a-entity windows-motion-controls laser-controls="hand: right" raycaster="objects: .locationSphere, .homebutton"></a-entity>
       
-      <a-sky rotation="0 -130 0" color="#666666"></a-sky>
+      <a-videosphere id="videoSphere" fade-in fade-out></a-videosphere>
 
       <!-- Location Spheres for the Home Navigation -->
 
       <a-entity class="locationSphere" location="image360: #forensicsPic; imageRotation: 180; video360: #forensics; positionX: -8.5; positionY: 1.8; positionZ: -9.8; signText: Forensics; yPlaneRotation: 30;  xShift: .8"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #rangePic; video360: #gunrange1; positionX: -5.9; positionY: 1.8; positionZ: -10.4; signText: Range 1;  yPlaneRotation: 20; xShift: .8;"></a-entity>
+      <a-entity class="locationSphere" location="image360: #rangePic; video360: #gunrange1;  positionX: -5.9; positionY: 1.8; positionZ: -10.4; signText: Range 1;  yPlaneRotation: 20; xShift: .8;"></a-entity>
 
       <a-entity class="locationSphere" location="image360: #rangePic; video360: #gunrange2; positionX: -3; positionY: 1.8; positionZ: -11.4; signText: Range 2;  yPlaneRotation: 10; xShift: .3; zShift: -.2;"></a-entity>
 
@@ -53,23 +55,18 @@
 
       <a-entity class="locationSphere" location="image360: #ambulancePic; imageRotation: 180; video360: #ambulance; positionX: 3.2; positionY: 1.8; positionZ: -11.9; signText: Ambulance; planeWidth: 2.4; yPlaneRotation: -10;  xShift: -.2"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #emsPic; imageRotation: 180; video360: #ems; positionX: 5.9; positionY: 1.8; positionZ: -10.9; signText: EMS; planeWidth: 1.6; yPlaneRotation: -20;  xShift: -.5"></a-entity>
+      <a-entity class="locationSphere" location="image360: #emsPic; imageRotation: 180; video360: #ems; positionX: 5.9; videoRotation: 360; positionY: 1.8; positionZ: -10.9; signText: EMS; planeWidth: 1.6; yPlaneRotation: -20;  xShift: -.5"></a-entity>
 
       <a-entity class="locationSphere" location="image360: #defibPic; imageRotation: 180; video360: #defib; positionX: 8.5; positionY: 1.8; positionZ: -9.8; signText: Defib; yPlaneRotation: -35;  xShift: -.8"></a-entity>
 
       
-
-
-
-
-      
       <a-entity class="homebutton" homebutton="image: #homeIcon;  positionX: 12.2; positionY: 3.8; positionZ: -10; signText: Home; yPlaneRotation: -50; xShift: -1"></a-entity>
 
-      <a-sphere></a-sphere>
+      
 
       <!--Home background-->
-      <a-plane rotation="-90 0 0" material="color:#b5af9b" scale="2.5 1.5 1" height="30" width="30" id="ground"></a-plane>
-      <a-sphere id="homeBackground" material="color:#6b0014;side:back" scale="15 15 15"></a-sphere>
+      <a-plane rotation="-90 0 0" material="color:#b5af9b" scale="2.5 1.5 1" height="30" width="30" id="ground" fade-in fade-out></a-plane>
+      <a-sphere id="homeBackground" material="color:#6b0014;side:back" scale="15 15 15" fade-in fade-out></a-sphere>
       
 
 
