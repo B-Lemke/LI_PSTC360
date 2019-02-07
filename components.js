@@ -1,3 +1,5 @@
+var currentVideo;
+
 AFRAME.registerComponent('location', {
     //Define the schema for the box    
     schema: {
@@ -5,7 +7,9 @@ AFRAME.registerComponent('location', {
         positionY: {type: 'number'},
         positionZ: {type: 'number'},
         image360: {type: 'map'},
+        imageRotation: {type: 'number', default: 360},
         video360: {type: 'selector'},
+        videoRotation: {type: 'number', default: 360},
         signText: {type: 'string'},
         planeWidth: {type: 'number', default: 2},
         yPlaneRotation: {type: 'number', default: 0},
@@ -16,7 +20,9 @@ AFRAME.registerComponent('location', {
     /*
     positionX, Y, and Z are used to position the Sphere in space on the plane
     image360 is a map of the image that will be projected onto the sphere
+    imageRotation is the number of degrees to rotate the image on the sphere around the y axis.
     video360 is a selector that points to the video that is loaded in the assets. This is the video that should be loaded and played once this sphere is clicked on
+    videoRotation can be used if the initial direction the viewer is looking it not ideal.
     signText is the text that will appear below the sphere and infront of the plane. It should read the name of the location that will be visited
     planeWidth is the width of the plane that is displayed behind the text. It is deafaulted to a value of 2 which should be suitable for most short names.
     yPlaneRotation is used to adjusted the rotation of the planes in 3D space
@@ -41,6 +47,9 @@ AFRAME.registerComponent('location', {
         //Create mesh for sphere
         this.sphereMesh = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial);
         this.sphereMesh.position.set(data.positionX,data.positionY,data.positionZ);
+
+        //rotate the sphere's mesh so the home symbol faces the camera. It must be converted from degrees to Radians
+        this.sphereMesh.rotation.y = (data.imageRotation * Math.PI) / 180;
 
 
         console.log(data.signText);
@@ -100,6 +109,7 @@ AFRAME.registerComponent('location', {
             console.log(self.data.video360);
 
 
+
             ////////Once any visible sphere has been clicked for a location, hide the spheres, planes and text
 
             //Check if the sphere is visible
@@ -136,6 +146,9 @@ AFRAME.registerComponent('location', {
 
                 var homebuttonText = document.querySelector(".homeNavigationText");
                 homebuttonText.setAttribute("visible", true);
+
+                //Set the current video as the vidoe that will be played
+                currentVideo = data.video360;
             }
 
         });
@@ -265,7 +278,7 @@ AFRAME.registerComponent('homebutton', {
         //Event listeners for controller interaction
         el.addEventListener('click', function (evt) {
 
-            sky.setAttribute('color', "#FFFFFF");
+            //sky.setAttribute('color', "#FFFFFF");
 
             //Once the home sphere has been clicked (if visisble), show the spheres, planes and text
 
@@ -315,10 +328,17 @@ function resetHomeScreen() {
     var homebuttonText = document.querySelector(".homeNavigationText");
     homebuttonText.setAttribute("visible", false);
 
+    console.log("Test");
+
+    console.log("Pausing video");
+    if(currentVideo != null){
+        console.log(currentVideo);
+        currentVideo.pause();
+    }
     var ground = document.querySelector("#ground");
-    ground.setAttribute("visible", true);
+    //ground.setAttribute("visible", true);
 
     var homeBackground = document.querySelector("#homeBackground");
-    homeBackground.setAttribute("visible", true);
+    //homeBackground.setAttribute("visible", true);
 }
 
