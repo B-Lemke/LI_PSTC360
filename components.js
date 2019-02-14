@@ -1,3 +1,8 @@
+
+/*
+The location component is used to create the geometry and meshes for the spheres, text and planes for each location that will can be viewed.
+It also contains information on what to do when the sphere is clicked on (showing the video and hiding the location spheres).
+*/
 AFRAME.registerComponent('location', {
     //Define the schema for the location sphere    
     schema: {
@@ -28,14 +33,14 @@ AFRAME.registerComponent('location', {
     zShift is also used to move the planes relative to their spheres, but should not be used unless the desied result cannot be achieved using xShift alone.
     */
 
-
-    //Initial creation of the mesh
     init: function () {
         var data = this.data;
         var el = this.el;
         var sceneEl = document.querySelector('a-scene');
 
-        //Create geometry for sphere
+
+
+        //Create geometry for SPHERE
         this.sphereGeometry = new THREE.SphereBufferGeometry(1, 32, 32);
 
         //Create material for sphere
@@ -49,11 +54,15 @@ AFRAME.registerComponent('location', {
         //rotate the sphere's mesh so the home symbol faces the camera. It must be converted from degrees to Radians
         this.sphereMesh.rotation.y = (data.imageRotation * Math.PI) / 180;
 
-
+        /*
+        Troubleshooting text for the sphere with its name and location
         console.log(data.signText);
         console.log(this.sphereMesh.position);
+        */
 
-        //Create geometry for plane
+
+
+        //Create geometry for PLANE
         this.planeGeometry = new THREE.PlaneGeometry(data.planeWidth, .8, 32);
 
         //Create material for plane
@@ -72,19 +81,17 @@ AFRAME.registerComponent('location', {
         el.setObject3D('mesh', this.sphereMesh);
         newPlane.setObject3D('mesh', this.planeMesh)
 
-
         //Give the entity a class we can refer to it by later
         newPlane.setAttribute("class", "navigationPlane");
-        console.log(newPlane);
         sceneEl.appendChild(newPlane);
 
 
-        //Create the text and set its attributes
+
+
+        //Create the TEXT and set its attributes
         var rotationValue = "0 " + data.yPlaneRotation + " 0";
-        console.log(rotationValue);
 
         var positionValue = String(data.positionX + data.xShift) + " " + String(data.positionY - 1.4) + " " + String(data.positionZ + 1.1 + data.zShift);
-        console.log(positionValue)
         var newText = document.createElement('a-entity');
 
         newText.setAttribute("text", {
@@ -98,34 +105,37 @@ AFRAME.registerComponent('location', {
         newText.setAttribute("rotation", rotationValue);
         sceneEl.appendChild(newText);
 
+
+
+
         var self = this;
         var videosphere = document.querySelector('a-videosphere');
 
-        //Event listeners for controller interaction
+        //Event listener for interaction
         el.addEventListener('click', function (evt) {
-            //Set the source of the videosphere and play it
-            videosphere.setAttribute('src', '#' + self.data.video360.id);
-            self.data.video360.play();
-            
 
             ////////Once any visible sphere has been clicked for a location, hide the spheres, planes and text
             //Check if the sphere is visible
             if (el.getAttribute('visible') == true) {
+                //Set the source of the videosphere and play it
+                videosphere.setAttribute('src', '#' + self.data.video360.id);
+                self.data.video360.play();
+
+
                 //Get an array of all of the sphere and loop through them setting their visibility to false
                 var spheres = document.querySelectorAll(".locationSphere");
                 for (var i = 0; i < spheres.length; i++) {
                     spheres[i].setAttribute("visible", false);
                 }
-
                 var navPlanes = document.querySelectorAll(".navigationPlane");
                 for (var i = 0; i < navPlanes.length; i++) {
                     navPlanes[i].setAttribute("visible", false);
                 }
-
                 var navText = document.querySelectorAll(".navigationText");
                 for (var i = 0; i < navText.length; i++) {
                     navText[i].setAttribute("visible", false);
                 }
+
 
                 //Hide the ground and home background
                 var ground = document.querySelector("#ground");
@@ -133,38 +143,30 @@ AFRAME.registerComponent('location', {
                 var homeBackground = document.querySelector("#homeBackground");
                 homeBackground.emit('fadeOutGo');
 
-                //Make the home button and label visisble
 
+                //Make the home button and label visisble
                 var homebutton = document.querySelector(".homebutton");
                 homebutton.setAttribute("visible", true);
-
                 var homebuttonPlane = document.querySelector(".homeNavigationPlane");
                 homebuttonPlane.setAttribute("visible", true);
-
                 var homebuttonText = document.querySelector(".homeNavigationText");
                 homebuttonText.setAttribute("visible", true);
 
+                
                 //Set the videosphere's rotation
                 videosphere.setAttribute("rotation", "0 " + data.videoRotation + " 0");
-
             }
 
         });
-    },
-
-    update: function () {
-
-    },
-
-    remove: function () {
     }
-
 });
 
 
 
-
-
+/*
+The homebutton component is used to create the geometry and meshes for the sphere, text and plane for the home button.
+It also contains information on what to do when the sphere is clicked on (pausing the video and showing the location spheres).
+*/
 AFRAME.registerComponent('homebutton', {
     //Define the schema for the homebutton    
     schema: {
@@ -187,14 +189,12 @@ AFRAME.registerComponent('homebutton', {
     zShift is also used to move the planes relative to their spheres, but should not be used unless the desied result cannot be achieved using xShift alone.
     */
 
-
-    //Initial creation of the mesh
     init: function () {
         var data = this.data;
         var el = this.el;
         var sceneEl = document.querySelector('a-scene');
 
-        //Create geometry for sphere
+        //Create geometry for SPHERE
         this.sphereGeometry = new THREE.SphereBufferGeometry(1, 32, 32);
 
         //Create material for sphere
@@ -208,10 +208,14 @@ AFRAME.registerComponent('homebutton', {
         //rotate the sphere's mesh so the home symbol faces the camera
         this.sphereMesh.rotation.y = -Math.PI * 3 / 4;
 
+        /* Troubleshooting information with the sphere's name and location
         console.log(data.signText);
         console.log(this.sphereMesh.position);
+        */
 
-        //Create geometry for plane
+
+
+        //Create geometry for PLANE
         this.planeGeometry = new THREE.PlaneGeometry(2, .8, 32);
 
         //Create material for plane
@@ -230,19 +234,17 @@ AFRAME.registerComponent('homebutton', {
         el.setObject3D('mesh', this.sphereMesh);
         newPlane.setObject3D('mesh', this.planeMesh)
 
-
         //Give the entity a class we can refer to it by later
         newPlane.setAttribute("class", "homeNavigationPlane");
-        console.log(newPlane);
         sceneEl.appendChild(newPlane);
 
 
-        //Create the text and set its attributes
+
+
+        //Create the TEXT and set its attributes
         var rotationValue = "0 " + data.yPlaneRotation + " 0";
-        console.log(rotationValue);
 
         var positionValue = String(data.positionX + data.xShift) + " " + String(data.positionY - 1.4) + " " + String(data.positionZ + 1.1 + data.zShift);
-        console.log(positionValue)
         var newText = document.createElement('a-entity');
 
         newText.setAttribute("text", {
@@ -256,17 +258,14 @@ AFRAME.registerComponent('homebutton', {
         newText.setAttribute("rotation", rotationValue);
         sceneEl.appendChild(newText);
 
-        var videosphere = document.querySelector('a-videosphere');
+
 
         //Make this home button invisible on startup
         resetHomeScreen();
 
 
-        //Event listeners for controller interaction
+        //Event listeners for interaction
         el.addEventListener('click', function (evt) {
-
-
-            //Once the home sphere has been clicked (if visisble), show the spheres, planes and text
 
 
             //check if the home button is visible
@@ -275,15 +274,12 @@ AFRAME.registerComponent('homebutton', {
                 //Get an array of all of the spheres and loop through them setting their visibility to true
                 var spheres = document.querySelectorAll(".locationSphere");
                 for (var i = 0; i < spheres.length; i++) {
-                    console.log(spheres[i]);
                     spheres[i].setAttribute("visible", true);
                 }
-
                 var navPlanes = document.querySelectorAll(".navigationPlane");
                 for (var i = 0; i < navPlanes.length; i++) {
                     navPlanes[i].setAttribute("visible", true);
                 }
-
                 var navText = document.querySelectorAll(".navigationText");
                 for (var i = 0; i < navText.length; i++) {
                     navText[i].setAttribute("visible", true);
@@ -293,34 +289,22 @@ AFRAME.registerComponent('homebutton', {
                 resetHomeScreen();
                 
                 videoSphere = document.querySelector("#videoSphere");
-
                 
                 if (videoSphere != null) {
-                    console.log("Pausing video");
                     currentVideoId = videoSphere.getAttribute("src");
-                    console.log("current video ID: " + currentVideoId);
                     currentVideo = document.querySelector(currentVideoId);
-                    console.log("current video: " + currentVideo);
                     currentVideo.pause();
-
                 }
             }
 
         });
-    },
-
-    update: function () {
-
-    },
-
-    remove: function () {
     }
-
 });
 
 
 
 function resetHomeScreen() {
+    //Remove the home button and plane and text from the screen
     var homebutton = document.querySelector(".homebutton");
     homebutton.setAttribute("visible", false);
     var homebuttonPlane = document.querySelector(".homeNavigationPlane");
@@ -328,18 +312,19 @@ function resetHomeScreen() {
     var homebuttonText = document.querySelector(".homeNavigationText");
     homebuttonText.setAttribute("visible", false);
 
-
+    //Fade in the ground and background for the home
     var ground = document.querySelector("#ground");
     ground.emit('fadeInGo');
-
     var homeBackground = document.querySelector("#homeBackground");
     homeBackground.emit('fadeInGo');
-    
 }
 
 
 
-
+/*
+fade-in is an animation component written to fade elements into a scene by ramping up their opacity linearly. 
+The animation is triggered by emiting the event fadeInGo on an element with this component.
+*/
 AFRAME.registerComponent('fade-in', {
     init: function () {
         var el = this.el;
@@ -355,7 +340,10 @@ AFRAME.registerComponent('fade-in', {
     },
 });
 
-
+/*
+fade-out is an animation component written to fade elements out of a scene by ramping down their opacity linearly. 
+The animation is triggered by emiting the event fadeOutGo on an element with this component.
+*/
 AFRAME.registerComponent('fade-out', {
     init: function () {
         var el = this.el;

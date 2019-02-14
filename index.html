@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
@@ -27,6 +28,7 @@
 
         <img id ="lobbyPic" crossorigin="anonymous" src="assets/images/lobby.jpg" />
         <img id ="rangePic" crossorigin="anonymous" src="assets/images/Range1.jpg" />
+        <img id ="targetPic" crossorigin="anonymous" src="assets/images/Range2.jpg" />
         <img id ="ambulancePic" crossorigin="anonymous" src="assets/images/Ambulance.jpg" />
         <img id ="defibPic" crossorigin="anonymous" src="assets/images/defibrillator.jpg" />
         <img id ="emsPic" crossorigin="anonymous" src="assets/images/EMS_IV.jpg" />
@@ -36,7 +38,11 @@
       </a-assets>
 
 
-      <a-camera wasd-controls-enabled="false"></a-camera>
+      <a-camera wasd-controls-enabled="false">
+        <a-cursor raycaster="objects: .locationSphere, .homebutton">
+
+        </a-cursor>
+      </a-camera>
     
       <a-entity windows-motion-controls laser-controls="hand: left" raycaster="objects: .locationSphere, .homebutton"></a-entity>
       <a-entity windows-motion-controls laser-controls="hand: right" raycaster="objects: .locationSphere, .homebutton"></a-entity>
@@ -49,7 +55,7 @@
 
       <a-entity class="locationSphere" location="image360: #rangePic; video360: #gunrange1;  positionX: -5.9; positionY: 1.8; positionZ: -10.4; signText: Range 1;  yPlaneRotation: 20; xShift: .8;"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #rangePic; video360: #gunrange2; positionX: -3; positionY: 1.8; positionZ: -11.4; signText: Range 2;  yPlaneRotation: 10; xShift: .3; zShift: -.2;"></a-entity>
+      <a-entity class="locationSphere" location="image360: #targetPic; video360: #gunrange2; positionX: -3; positionY: 1.8; positionZ: -11.4; signText: Range 2;  yPlaneRotation: 10; xShift: .3; zShift: -.2;"></a-entity>
 
       <a-entity class="locationSphere" location="image360: #lobbyPic; video360: #lobby; positionX: 0; positionY: 1.8; positionZ: -12; signText: Lobby; xShift: 0"></a-entity>
 
