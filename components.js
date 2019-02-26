@@ -15,7 +15,6 @@ AFRAME.registerComponent('location', {
         videoRotation: { type: 'number', default: 270 },
         signText: { type: 'string' },
         planeWidth: { type: 'number', default: 2 },
-        yPlaneRotation: { type: 'number', default: 0 },
         xShift: { type: 'number', default: .5 },
         zShift: { type: 'number', default: 0 }
     },
@@ -54,6 +53,8 @@ AFRAME.registerComponent('location', {
         //rotate the sphere's mesh so the home symbol faces the camera. It must be converted from degrees to Radians
         this.sphereMesh.rotation.y = (data.imageRotation * Math.PI) / 180;
 
+        el.setObject3D('mesh', this.sphereMesh);
+
         /*
         Troubleshooting text for the sphere with its name and location
         console.log(data.signText);
@@ -73,24 +74,22 @@ AFRAME.registerComponent('location', {
 
         //adjust the position
         this.planeMesh.position.set(data.positionX + data.xShift, data.positionY - 1.4, data.positionZ + 1 + data.zShift);
-        this.planeMesh.rotateY(THREE.Math.degToRad(data.yPlaneRotation));
-
+        
         var newPlane = document.createElement('a-entity');
 
         //set mesh on entity
-        el.setObject3D('mesh', this.sphereMesh);
         newPlane.setObject3D('mesh', this.planeMesh)
 
         //Give the entity a class we can refer to it by later
         newPlane.setAttribute("class", "navigationPlane");
+
         sceneEl.appendChild(newPlane);
 
+        newPlane.getObject3D('mesh').lookAt(0,0,0); 
+        
 
 
-
-        //Create the TEXT and set its attributes
-        var rotationValue = "0 " + data.yPlaneRotation + " 0";
-
+        //////////Text Values
         var positionValue = String(data.positionX + data.xShift) + " " + String(data.positionY - 1.4) + " " + String(data.positionZ + 1.1 + data.zShift);
         var newText = document.createElement('a-entity');
 
@@ -100,9 +99,10 @@ AFRAME.registerComponent('location', {
             "height": 10,
             "align": "center"
         });
+
         newText.setAttribute("class", "navigationText");
         newText.setAttribute("position", positionValue)
-        newText.setAttribute("rotation", rotationValue);
+        newText.setAttribute("look-at", "#camera");
         sceneEl.appendChild(newText);
 
 
@@ -119,8 +119,11 @@ AFRAME.registerComponent('location', {
             if (el.getAttribute('visible') == true) {
                 //Set the source of the videosphere and play it
                 videosphere.setAttribute('src', '#' + self.data.video360.id);
-                self.data.video360.play();
 
+                video= document.querySelector("#" + self.data.video360.id);
+                video.currentTime = 0;
+                video.play();
+                
 
                 //Get an array of all of the sphere and loop through them setting their visibility to false
                 var spheres = document.querySelectorAll(".locationSphere");
@@ -175,7 +178,6 @@ AFRAME.registerComponent('homebutton', {
         positionZ: { type: 'number' },
         image: { type: 'map' },
         signText: { type: 'string' },
-        yPlaneRotation: { type: 'number', default: 0 },
         xShift: { type: 'number', default: .5 },
         zShift: { type: 'number', default: 0 }
     },
@@ -226,7 +228,6 @@ AFRAME.registerComponent('homebutton', {
 
         //adjust the position
         this.planeMesh.position.set(data.positionX + data.xShift, data.positionY - 1.4, data.positionZ + 1 + data.zShift);
-        this.planeMesh.rotateY(THREE.Math.degToRad(data.yPlaneRotation));
 
         var newPlane = document.createElement('a-entity');
 
@@ -237,13 +238,12 @@ AFRAME.registerComponent('homebutton', {
         //Give the entity a class we can refer to it by later
         newPlane.setAttribute("class", "homeNavigationPlane");
         sceneEl.appendChild(newPlane);
-
+        
+        newPlane.getObject3D('mesh').lookAt(0,0,0);
 
 
 
         //Create the TEXT and set its attributes
-        var rotationValue = "0 " + data.yPlaneRotation + " 0";
-
         var positionValue = String(data.positionX + data.xShift) + " " + String(data.positionY - 1.4) + " " + String(data.positionZ + 1.1 + data.zShift);
         var newText = document.createElement('a-entity');
 
@@ -255,7 +255,7 @@ AFRAME.registerComponent('homebutton', {
         });
         newText.setAttribute("class", "homeNavigationText");
         newText.setAttribute("position", positionValue);
-        newText.setAttribute("rotation", rotationValue);
+        newText.setAttribute("look-at", "#camera")
         sceneEl.appendChild(newText);
 
 

@@ -4,6 +4,7 @@
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="components.js"></script>
     <script src="aframe-animation-component.min.js"></script>
+    <script src="look-at.js"></script>
   </head>
   <body>
     <a-scene>
@@ -38,8 +39,11 @@
       </a-assets>
 
 
-      <a-camera wasd-controls-enabled="false">
-        <a-cursor raycaster="objects: .locationSphere, .homebutton">
+      <a-camera id="camera" wasd-controls-enabled="false">
+        <a-cursor
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          color="#FFFFFF"
+          raycaster="objects: .locationSphere, .homebutton">
 
         </a-cursor>
       </a-camera>
@@ -51,22 +55,22 @@
 
       <!-- Location Spheres for the Home Navigation -->
 
-      <a-entity class="locationSphere" location="image360: #forensicsPic; imageRotation: 180; video360: #forensics; positionX: -8.5; positionY: 1.8; positionZ: -9.8; signText: Forensics; yPlaneRotation: 30;  xShift: .8"></a-entity>
+      <a-entity  class="locationSphere" location="image360: #forensicsPic; imageRotation: 180; video360: #forensics; positionX: -8.5; positionY: 1.8; positionZ: -9.8; signText: Forensics; xShift: .8"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #rangePic; video360: #gunrange1;  positionX: -5.9; positionY: 1.8; positionZ: -10.4; signText: Range 1;  yPlaneRotation: 20; xShift: .8;"></a-entity>
+      <a-entity class="locationSphere" location="image360: #rangePic; video360: #gunrange1;  positionX: -5.9; positionY: 1.8; positionZ: -10.4; signText: Range 1;  xShift: .8;"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #targetPic; video360: #gunrange2; positionX: -3; positionY: 1.8; positionZ: -11.4; signText: Range 2;  yPlaneRotation: 10; xShift: .3; zShift: -.2;"></a-entity>
+      <a-entity class="locationSphere" location="image360: #targetPic; video360: #gunrange2; positionX: -3; positionY: 1.8; positionZ: -11.4; signText: Range 2; xShift: .3; zShift: -.2;"></a-entity>
 
       <a-entity class="locationSphere" location="image360: #lobbyPic; video360: #lobby; positionX: 0; positionY: 1.8; positionZ: -12; signText: Lobby; xShift: 0"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #ambulancePic; imageRotation: 180; video360: #ambulance; positionX: 3.2; positionY: 1.8; positionZ: -11.9; signText: Ambulance; planeWidth: 2.4; yPlaneRotation: -10;  xShift: -.2"></a-entity>
+      <a-entity class="locationSphere" location="image360: #ambulancePic; imageRotation: 180; video360: #ambulance; positionX: 3.2; positionY: 1.8; positionZ: -11.9; signText: Ambulance; planeWidth: 2.4;  xShift: -.2"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #emsPic; imageRotation: 180; video360: #ems; positionX: 5.9; videoRotation: 360; positionY: 1.8; positionZ: -10.9; signText: EMS; planeWidth: 1.6; yPlaneRotation: -20;  xShift: -.5"></a-entity>
+      <a-entity class="locationSphere" location="image360: #emsPic; imageRotation: 180; video360: #ems; positionX: 5.9; videoRotation: 360; positionY: 1.8; positionZ: -10.9; signText: EMS; planeWidth: 1.6;  xShift: -.5"></a-entity>
 
-      <a-entity class="locationSphere" location="image360: #defibPic; imageRotation: 180; video360: #defib; positionX: 8.5; positionY: 1.8; positionZ: -9.8; signText: Defib; yPlaneRotation: -35;  xShift: -.8"></a-entity>
+      <a-entity class="locationSphere" location="image360: #defibPic; imageRotation: 180; video360: #defib; positionX: 8.5; positionY: 1.8; positionZ: -9.8; signText: Defib;  xShift: -.8"></a-entity>
 
       
-      <a-entity class="homebutton" homebutton="image: #homeIcon;  positionX: 12.2; positionY: 3.8; positionZ: -10; signText: Home; yPlaneRotation: -50; xShift: -1"></a-entity>
+      <a-entity class="homebutton" homebutton="image: #homeIcon;  positionX: 12.2; positionY: 3.8; positionZ: -10; signText: Home; xShift: -1"></a-entity>
 
       
 
