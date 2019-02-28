@@ -10,7 +10,7 @@ AFRAME.registerComponent('homebutton', {
         var el = this.el;
         
         //Create geometry for PLANE
-        this.planeGeometry = new THREE.PlaneGeometry(1, 1, 1);
+        this.planeGeometry = new THREE.PlaneGeometry(1, 0, 1);
 
         //Create material for plane
         this.texture = new THREE.TextureLoader().load(data.image.src);
@@ -21,7 +21,7 @@ AFRAME.registerComponent('homebutton', {
 
         el.setObject3D('mesh', this.planeMesh);
 
-        el.getObject3D('mesh').position = new THREE.Vector3( 0, 0, 0);
+        el.getObject3D('mesh').position = new THREE.Vector3( 0, -10, 0);
         el.getObject3D('mesh').rotation.x = -Math.PI / 2;
 
         //Give the entity a class we can refer to it by later

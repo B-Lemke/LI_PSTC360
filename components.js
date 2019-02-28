@@ -198,3 +198,4 @@ AFRAME.registerComponent('fade-out', {
         })
     },
 });
+
