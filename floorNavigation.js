@@ -10,7 +10,7 @@ AFRAME.registerComponent('homebutton', {
         var el = this.el;
         
         //Create geometry for PLANE
-        this.planeGeometry = new THREE.PlaneGeometry(1, 0, 1);
+        this.planeGeometry = new THREE.PlaneGeometry(2, 2, 2);
 
         //Create material for plane
         this.texture = new THREE.TextureLoader().load(data.image.src);
