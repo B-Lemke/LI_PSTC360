@@ -21,7 +21,7 @@ AFRAME.registerComponent('homebutton', {
 
         el.setObject3D('mesh', this.planeMesh);
 
-        el.getObject3D('mesh').position = new THREE.Vector3( 0, -10, 0);
+        el.getObject3D('mesh').position = new THREE.Vector3( 0, 0, 0);
         el.getObject3D('mesh').rotation.x = -Math.PI / 2;
 
         //Give the entity a class we can refer to it by later
