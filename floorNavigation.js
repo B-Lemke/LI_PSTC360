@@ -77,11 +77,12 @@ function resetHomeScreen() {
     homebuttonPlane.setAttribute("visible", false);
 
 
-    //Fade in the ground and background for the home
-    var ground = document.querySelector("#ground");
-    ground.emit('fadeInGo');
-    var homeBackground = document.querySelector("#homeBackground");
-    homeBackground.emit('fadeInGo');
+    //Any item with the fade-in attribute should run its fadeInGo animation
+    fadeInItems = document.querySelectorAll("[fade-in]");
+    fadeInItems.forEach(function(fadeItem){
+        console.log(fadeItem);
+        fadeItem.emit('fadeInGo');
+    });
 }
 
 

@@ -13,8 +13,6 @@ AFRAME.registerComponent('homesphere', {
         positionZ: { type: 'number' },
         image: { type: 'map' },
         signText: { type: 'string' },
-        xShift: { type: 'number', default: .5 },
-        zShift: { type: 'number', default: 0 }
     },
 
     /*
@@ -62,7 +60,7 @@ AFRAME.registerComponent('homesphere', {
         this.planeMesh = new THREE.Mesh(this.planeGeometry, this.planeMaterial);
 
         //adjust the position
-        this.planeMesh.position.set(data.positionX + data.xShift, data.positionY - 1.4, data.positionZ + 1 + data.zShift);
+        this.planeMesh.position.set(data.positionX, data.positionY - 1.4, data.positionZ + 1);
 
         var newPlane = document.createElement('a-entity');
 
@@ -79,7 +77,7 @@ AFRAME.registerComponent('homesphere', {
 
 
         //Create the TEXT and set its attributes
-        var positionValue = String(data.positionX + data.xShift) + " " + String(data.positionY - 1.4) + " " + String(data.positionZ + 1.1 + data.zShift);
+        var positionValue = String(data.positionX ) + " " + String(data.positionY - 1.4) + " " + String(data.positionZ + 1.1);
         var newText = document.createElement('a-entity');
 
         newText.setAttribute("text", {
@@ -88,6 +86,7 @@ AFRAME.registerComponent('homesphere', {
             "height": 10,
             "align": "center"
         });
+
         newText.setAttribute("class", "homeNavigationText");
         newText.setAttribute("position", positionValue);
         newText.setAttribute("look-at", "#camera")
@@ -139,6 +138,7 @@ AFRAME.registerComponent('homesphere', {
 
 
 function resetHomeScreen() {
+
     //Remove the home button and plane and text from the screen
     var homesphere = document.querySelector(".homesphere");
     homesphere.setAttribute("visible", false);
@@ -147,11 +147,13 @@ function resetHomeScreen() {
     var homesphereText = document.querySelector(".homeNavigationText");
     homesphereText.setAttribute("visible", false);
 
-    //Fade in the ground and background for the home
-    var ground = document.querySelector("#ground");
-    ground.emit('fadeInGo');
-    var homeBackground = document.querySelector("#homeBackground");
-    homeBackground.emit('fadeInGo');
+    //Any item with the fade-in attribute should run its fadeInGo animation
+    fadeInItems = document.querySelectorAll("[fade-in]");
+    fadeInItems.forEach(function(fadeItem){
+        console.log(fadeItem);
+        fadeItem.emit('fadeInGo');
+    });
+
 }
 
 //Example entity

@@ -74,7 +74,7 @@ AFRAME.registerComponent('location', {
 
         //adjust the position
         this.planeMesh.position.set(data.positionX + data.xShift, data.positionY - 1.4, data.positionZ + 1 + data.zShift);
-        
+
         var newPlane = document.createElement('a-entity');
 
         //set mesh on entity
@@ -85,9 +85,9 @@ AFRAME.registerComponent('location', {
 
         sceneEl.appendChild(newPlane);
 
-        newPlane.getObject3D('mesh').lookAt(0,0,0); 
+        newPlane.getObject3D('mesh').lookAt(0, 0, 0);
 
-        
+
 
 
         //////////Text Values
@@ -121,10 +121,10 @@ AFRAME.registerComponent('location', {
                 //Set the source of the videosphere and play it
                 videosphere.setAttribute('src', '#' + self.data.video360.id);
 
-                video= document.querySelector("#" + self.data.video360.id);
+                video = document.querySelector("#" + self.data.video360.id);
                 video.currentTime = 0;
                 video.play();
-                
+
 
                 //Get an array of all of the sphere and loop through them setting their visibility to false
                 var spheres = document.querySelectorAll(".locationSphere");
@@ -141,16 +141,20 @@ AFRAME.registerComponent('location', {
                 }
 
 
-                //Hide the ground and home background
-                var ground = document.querySelector("#ground");
-                ground.emit('fadeOutGo');
-                var homeBackground = document.querySelector("#homeBackground");
-                homeBackground.emit('fadeOutGo');
+                //Any item with the fade-out attribute should run its fadeOutGo animation
+                fadeOutItems = document.querySelectorAll("[fade-out]");
+                fadeOutItems.forEach(function(fadeItem){
+                    console.log(fadeItem);
+                    fadeItem.emit('fadeOutGo');
+                });
+
 
                 //Make the home button and label visisble
                 var homebuttonPlane = document.querySelector(".homeNavigationPlane");
                 homebuttonPlane.setAttribute("visible", true);
-                
+
+
+
                 //Set the videosphere's rotation
                 videosphere.setAttribute("rotation", "0 " + data.videoRotation + " 0");
             }
@@ -168,15 +172,26 @@ The animation is triggered by emiting the event fadeInGo on an element with this
 AFRAME.registerComponent('fade-in', {
     init: function () {
         var el = this.el;
-
-        el.setAttribute("animation__fade-in", {
-            "property": "material.opacity",
-            "dur": 1000,
-            "easing": "linear",
-            "from": 0,
-            "to": 1,
-            "startEvents": "fadeInGo"
-        })
+        if (el.hasAttribute("text")) {
+            el.setAttribute("animation__fade-in", {
+                "property": "text.opacity",
+                "dur": 1000,
+                "easing": "linear",
+                "from": 0,
+                "to": 1,
+                "startEvents": "fadeInGo"
+            });
+        }
+        else {
+            el.setAttribute("animation__fade-in", {
+                "property": "material.opacity",
+                "dur": 1000,
+                "easing": "linear",
+                "from": 0,
+                "to": 1,
+                "startEvents": "fadeInGo"
+            });
+        }
     },
 });
 
@@ -188,14 +203,31 @@ AFRAME.registerComponent('fade-out', {
     init: function () {
         var el = this.el;
 
-        el.setAttribute("animation__fade-out", {
-            "property": "material.opacity",
-            "dur": 1500,
-            "easing": "linear",
-            "from": 1,
-            "to": 0,
-            "startEvents": "fadeOutGo"
-        })
-    },
+
+        if (el.hasAttribute("text")) {
+            //fade out for text
+            el.setAttribute("animation__fade-out", {
+                "property": "text.opacity",
+                "dur": 1500,
+                "easing": "linear",
+                "from": 1,
+                "to": 0,
+                "startEvents": "fadeOutGo"
+            });
+        } else {
+            //fade out for everything else
+            el.setAttribute("animation__fade-out", {
+                "property": "material.opacity",
+                "dur": 1500,
+                "easing": "linear",
+                "from": 1,
+                "to": 0,
+                "startEvents": "fadeOutGo"
+            });
+        }
+
+    }
+
+
 });
 

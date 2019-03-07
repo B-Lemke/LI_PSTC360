@@ -49,9 +49,13 @@
       <a-entity controller_connected windows-motion-controls laser-controls="hand: left" raycaster="objects: .locationSphere, .homeNavigationPlane, .homebutton"></a-entity>
       <a-entity controller_connected windows-motion-controls laser-controls="hand: right" raycaster="objects: .locationSphere, .homeNavigationPlane, .homebutton"></a-entity>
       
-      <a-videosphere id="videoSphere" fade-in fade-out></a-videosphere>
+      <a-videosphere id="videoSphere"></a-videosphere>
 
       <!-- Location Spheres for the Home Navigation -->
+
+      <a-entity id="welcomeMsg" text="value: Welcome; height: 50; width: 30; color: #eeede8" position="12 6 -12.5" fade-in fade-out></a-entity>
+      <a-entity id="welcomeSelect" text="value: Please select a scene to view!; height: 50; width: 30; color: #eeede8" position="6 4 -11" fade-in fade-out></a-entity>
+      <a-entity id="turnAroundMsg" text="value: Turn Around!; height: 50; width: 30; color: #eeede8" position="-11 3.5 7" rotation="0 180 0" fade-in fade-out></a-entity>
 
       <a-entity  class="locationSphere" location="image360: #forensicsPic; imageRotation: 180; video360: #forensics; positionX: -8.5; positionY: 1.8; positionZ: -9.8; signText: Forensics; xShift: .8"></a-entity>
 
