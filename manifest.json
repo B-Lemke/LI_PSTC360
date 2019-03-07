@@ -1,0 +1,115 @@
+{
+    "places":{
+        "home" : {
+            "image": null,
+            "video": null,
+            "name": "Home",
+            "things": [
+                {
+                    "kind": "navigation",
+                    "payload" : {
+                        "position": {"x": -8.5, "y": 1.8, "z": -9.8},
+                        "title" : "Forensics",
+                        "place" : "forensics",
+                        "image" : "assets/images/forensics.jpg"
+                    }
+                },
+                {
+                    "kind": "navigation",
+                    "payload" : {
+                        "position": {"x": -5.9, "y": 1.8, "z": -10.4},
+                        "title" : "Range 1",
+                        "place" : "range1",
+                        "image" : "assets/images/Range1.jpg"
+                    }
+                },
+                {
+                    "kind": "navigation",
+                    "payload" : {
+                        "position": {"x": -3, "y": 1.8, "z": -11.4},
+                        "title" : "Range 2",
+                        "place" : "range2",
+                        "image" : "assets/images/range2.jpg"
+                    }
+                },
+                {
+                    "kind": "navigation",
+                    "payload" : {
+                        "position": {"x": 0, "y": 1.8, "z": -12},
+                        "title" : "Lobby",
+                        "place" : "lobby",
+                        "image" : "assets/images/lobby.jpg"
+                    }
+                },
+                {
+                    "kind": "navigation",
+                    "payload" : {
+                        "position": {"x": 3.2, "y": 1.8, "z": -11.9},
+                        "title" : "Ambulance",
+                        "place" : "ambulance",
+                        "image" : "assets/images/Amblunace.jpg"
+                    }
+                },
+                {
+                    "kind": "navigation",
+                    "payload" : {
+                        "position": {"x": 5.9, "y": 1.8, "z": -10.9},
+                        "title" : "EMS",
+                        "place" : "ems",
+                        "image" : "assets/images/EMS_IV.jpg"
+                    }
+                },
+                {
+                    "kind": "navigation",
+                    "payload" : {
+                        "position": {"x": 8.5, "y": 1.8, "z": -9.8},
+                        "title" : "Defib",
+                        "place" : "defib",
+                        "image" : "assets/images/defibrillator.jpg"
+                    }
+                }
+
+            ]
+        },
+        "forensics" : {
+            "image": "assets/images/forensics.jpg",
+            "video": "assets/video/forensics.mp4",
+            "name": "Forensics"
+        },
+        "range1" :
+        {
+            "image": "assets/images/Range1.jpg",
+            "video": "assets/video/Range1.mp4",
+            "name": "Range 1"
+        },
+        "range2" :{
+            "image": "assets/images/range2.jpg",
+            "video": "assets/video/gunrange.mp4",
+            "name": "Range 2"
+        },
+        "lobby" :{
+            "image": "assets/images/lobby.jpg",
+            "video": "assets/video/lobby.mp4",
+            "name": "Lobby"
+        },
+        "ambulance" :{
+            "image": "assets/images/Ambulance.jpg",
+            "video": "assets/video/ambulance.mp4",
+            "name": "Ambulance"
+        },
+        "ems" :{
+            "image": "assets/images/EMS_IV.jpg",
+            "video": "assets/video/EMS_IV.mp4",
+            "name": "EMS"
+        },
+        "defib" :{
+            "image": "assets/images/defibrillator.jpg",
+            "video": "assets/video/defibrilllator.mp4",
+            "name": "Defib"
+        }     
+
+    },
+    "startPlace": "home"
+}
+
+
