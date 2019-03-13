@@ -114,10 +114,6 @@ AFRAME.registerComponent('homesphere', {
                 for (var i = 0; i < navPlanes.length; i++) {
                     navPlanes[i].setAttribute("visible", true);
                 }
-                var navText = document.querySelectorAll(".navigationText");
-                for (var i = 0; i < navText.length; i++) {
-                    navText[i].setAttribute("visible", true);
-                }
 
                 //hHde the Home sphere and plane and text
                 resetHomeScreen();

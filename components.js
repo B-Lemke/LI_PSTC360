@@ -80,8 +80,10 @@ AFRAME.registerComponent('location', {
         newPlane.setAttribute("text", {
             "value": data.signText,
             "color": "white",
-            "align": "center"
-            
+            "align": "center",
+            "wrapCount": 10,
+            "zOffset": 0.005,
+             
         });
 
         sceneEl.appendChild(newPlane);
@@ -118,10 +120,6 @@ AFRAME.registerComponent('location', {
                 var navPlanes = document.querySelectorAll(".navigationPlane");
                 for (var i = 0; i < navPlanes.length; i++) {
                     navPlanes[i].setAttribute("visible", false);
-                }
-                var navText = document.querySelectorAll(".navigationText");
-                for (var i = 0; i < navText.length; i++) {
-                    navText[i].setAttribute("visible", false);
                 }
 
 
