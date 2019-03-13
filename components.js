@@ -14,9 +14,7 @@ AFRAME.registerComponent('location', {
         video360: { type: 'selector' },
         videoRotation: { type: 'number', default: 270 },
         signText: { type: 'string' },
-        planeWidth: { type: 'number', default: 2 },
-        xShift: { type: 'number', default: .5 },
-        zShift: { type: 'number', default: 0 }
+        planeWidth: { type: 'number', default: 2 }
     },
 
     /*
@@ -55,56 +53,42 @@ AFRAME.registerComponent('location', {
 
         el.setObject3D('mesh', this.sphereMesh);
 
-        /*
-        Troubleshooting text for the sphere with its name and location
-        console.log(data.signText);
-        console.log(this.sphereMesh.position);
-        */
 
-
-
-        //Create geometry for PLANE
-        this.planeGeometry = new THREE.PlaneGeometry(data.planeWidth, .8, 32);
-
-        //Create material for plane
-        this.planeMaterial = new THREE.MeshStandardMaterial({ color: "#330000" });
-
-        //Create mesh for plane
-        this.planeMesh = new THREE.Mesh(this.planeGeometry, this.planeMaterial);
-
-        //adjust the position
-        this.planeMesh.position.set(data.positionX + data.xShift, data.positionY - 1.4, data.positionZ + 1 + data.zShift);
-
+        //Plane and text
         var newPlane = document.createElement('a-entity');
 
-        //set mesh on entity
-        newPlane.setObject3D('mesh', this.planeMesh)
+        newPlane.setAttribute('geometry', {
+            "primitive": "plane",
+            "width": 2,
+            "height": 0.8,
+        })
+
+        newPlane.setAttribute('position', {
+            "x": data.positionX,
+            "y": data.positionY - 1.4,
+            "z": data.positionZ,
+        })
+
+        newPlane.setAttribute("material", {
+            color: "#330000"
+        })
 
         //Give the entity a class we can refer to it by later
         newPlane.setAttribute("class", "navigationPlane");
 
-        sceneEl.appendChild(newPlane);
-
-        newPlane.getObject3D('mesh').lookAt(0, 0, 0);
-
-
-
-
         //////////Text Values
-        var positionValue = String(data.positionX + data.xShift) + " " + String(data.positionY - 1.4) + " " + String(data.positionZ + 1.1 + data.zShift);
-        var newText = document.createElement('a-entity');
-
-        newText.setAttribute("text", {
+        newPlane.setAttribute("text", {
             "value": data.signText,
-            "width": 10,
-            "height": 10,
+            "color": "white",
             "align": "center"
+            
         });
 
-        newText.setAttribute("class", "navigationText");
-        newText.setAttribute("position", positionValue)
-        newText.setAttribute("look-at", "#camera");
-        sceneEl.appendChild(newText);
+        sceneEl.appendChild(newPlane);
+
+        newPlane.setAttribute("look-at", "#camera");
+
+
 
 
 
