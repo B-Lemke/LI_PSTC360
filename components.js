@@ -1,3 +1,8 @@
+//Node list fix for ForEach in edge
+if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = Array.prototype.forEach;
+}
+
 
 /*
 The location component is used to create the geometry and meshes for the spheres, text and planes for each location that will can be viewed.
@@ -6,15 +11,7 @@ It also contains information on what to do when the sphere is clicked on (showin
 AFRAME.registerComponent('location', {
     //Define the schema for the location sphere    
     schema: {
-        positionX: { type: 'number' },
-        positionY: { type: 'number' },
-        positionZ: { type: 'number' },
-        image360: { type: 'map' },
-        imageRotation: { type: 'number', default: 360 },
-        video360: { type: 'selector' },
-        videoRotation: { type: 'number', default: 270 },
-        signText: { type: 'string' },
-        planeWidth: { type: 'number', default: 2 }
+        payload : {type: "string"}
     },
 
     /*
@@ -24,14 +21,11 @@ AFRAME.registerComponent('location', {
     video360 is a selector that points to the video that is loaded in the assets. This is the video that should be loaded and played once this sphere is clicked on
     videoRotation can be used if the initial direction the viewer is looking it not ideal.
     signText is the text that will appear below the sphere and infront of the plane. It should read the name of the location that will be visited
-    planeWidth is the width of the plane that is displayed behind the text. It is deafaulted to a value of 2 which should be suitable for most short names.
-    yPlaneRotation is used to adjusted the rotation of the planes in 3D space
-    xShift is used to move the planes relative to their spheres
-    zShift is also used to move the planes relative to their spheres, but should not be used unless the desied result cannot be achieved using xShift alone.
     */
 
     init: function () {
         var data = this.data;
+        var payload = JSON.parse(this.data.payload);
         var el = this.el;
         var sceneEl = document.querySelector('a-scene');
 
@@ -41,15 +35,16 @@ AFRAME.registerComponent('location', {
         this.sphereGeometry = new THREE.SphereBufferGeometry(1, 32, 32);
 
         //Create material for sphere
-        texture = new THREE.TextureLoader().load(data.image360.src);
+        texture = new THREE.TextureLoader().load(payload.image);
+        console.log(payload.image);
         this.sphereMaterial = new THREE.MeshBasicMaterial({ map: texture });
 
         //Create mesh for sphere
         this.sphereMesh = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial);
-        this.sphereMesh.position.set(data.positionX, data.positionY, data.positionZ);
+        this.sphereMesh.position.set(payload.position.x, payload.position.y, payload.position.z);
 
         //rotate the sphere's mesh so the home symbol faces the camera. It must be converted from degrees to Radians
-        this.sphereMesh.rotation.y = (data.imageRotation * Math.PI) / 180;
+        //this.sphereMesh.rotation.y = (data.imageRotation * Math.PI) / 180;
 
         el.setObject3D('mesh', this.sphereMesh);
 
@@ -64,9 +59,9 @@ AFRAME.registerComponent('location', {
         })
 
         newPlane.setAttribute('position', {
-            "x": data.positionX,
-            "y": data.positionY - 1.4,
-            "z": data.positionZ,
+            "x": payload.position.x,
+            "y": payload.position.y - 1.4,
+            "z": payload.position.z,
         })
 
         newPlane.setAttribute("material", {
@@ -76,22 +71,21 @@ AFRAME.registerComponent('location', {
         //Give the entity a class we can refer to it by later
         newPlane.setAttribute("class", "navigationPlane");
 
+
+
+
         //////////Text Values
         newPlane.setAttribute("text", {
-            "value": data.signText,
+            "value": payload.title,
             "color": "white",
             "align": "center",
-            "wrapCount": 10,
+            "wrapCount": payload.title.length < 6 ? 8 : payload.title.length+3,
             "zOffset": 0.005,
-             
         });
 
         sceneEl.appendChild(newPlane);
 
         newPlane.setAttribute("look-at", "#camera");
-
-
-
 
 
 
@@ -123,10 +117,10 @@ AFRAME.registerComponent('location', {
                 }
 
 
+
                 //Any item with the fade-out attribute should run its fadeOutGo animation
                 fadeOutItems = document.querySelectorAll("[fade-out]");
                 fadeOutItems.forEach(function(fadeItem){
-                    console.log(fadeItem);
                     fadeItem.emit('fadeOutGo');
                 });
 

@@ -6,6 +6,7 @@
     <script src="look-at.js"></script>
     <script src="floorNavigation.js"></script>
     <script src="detectDevice.js"></script>
+    <script src="jsonParse.js"></script>
     <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
     
   </head>
@@ -57,19 +58,6 @@
       <a-entity id="welcomeSelect" text="value: Please select a scene to view!; height: 50; width: 30; color: #eeede8" position="6 4 -11" fade-in fade-out></a-entity>
       <a-entity id="turnAroundMsg" text="value: Turn Around!; height: 50; width: 30; color: #eeede8" position="-11 3.5 7" rotation="0 180 0" fade-in fade-out></a-entity>
 
-      <a-entity  class="locationSphere" location="image360: #forensicsPic; imageRotation: 180; video360: #forensics; positionX: -8.5; positionY: 1.8; positionZ: -9.8; signText: Forensics;"></a-entity>
-
-      <a-entity class="locationSphere" location="image360: #rangePic; video360: #gunrange1;  positionX: -5.9; positionY: 1.8; positionZ: -10.4; signText: Range 1; "></a-entity>
-
-      <a-entity class="locationSphere" location="image360: #targetPic; video360: #gunrange2; positionX: -3; positionY: 1.8; positionZ: -11.4; signText: Range 2;"></a-entity>
-
-      <a-entity class="locationSphere" location="image360: #lobbyPic; video360: #lobby; positionX: 0; positionY: 1.8; positionZ: -12; signText: Lobby;"></a-entity>
-
-      <a-entity class="locationSphere" location="image360: #ambulancePic; imageRotation: 180; video360: #ambulance; positionX: 3.2; positionY: 1.8; positionZ: -11.9; signText: Ambulance; planeWidth: 2.4;"></a-entity>
-
-      <a-entity class="locationSphere" location="image360: #emsPic; imageRotation: 180; video360: #ems; positionX: 5.9; videoRotation: 360; positionY: 1.8; positionZ: -10.9; signText: EMS; planeWidth: 1.6; "></a-entity>
-
-      <a-entity class="locationSphere" location="image360: #defibPic; imageRotation: 180; video360: #defib; positionX: 8.5; positionY: 1.8; positionZ: -9.8; signText: Defib;"></a-entity>
 
       
       <a-entity class="homebutton" homebutton="image: #homeIcon;"></a-entity>
@@ -79,7 +67,7 @@
       <a-sphere id="homeBackground" material="color:#6b0014;side:back" scale="15 15 15" fade-in fade-out></a-sphere>
       
 
-
+      <a-entity arena="manifest: manifest.json; videoSphere: #videoSphere"></a-entity>
     </a-scene>
   </body>
 

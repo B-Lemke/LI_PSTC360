@@ -76,7 +76,6 @@ function resetHomeScreen() {
     //Any item with the fade-in attribute should run its fadeInGo animation
     fadeInItems = document.querySelectorAll("[fade-in]");
     fadeInItems.forEach(function(fadeItem){
-        console.log(fadeItem);
         fadeItem.emit('fadeInGo');
     });
 }

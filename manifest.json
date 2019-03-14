@@ -1,8 +1,8 @@
 {
     "places":{
         "home" : {
-            "image": null,
-            "video": null,
+            "image": "assets/images/forensics.jpg",
+            "video": "assets/video/Range1.mp4",
             "name": "Home",
             "things": [
                 {
@@ -47,7 +47,7 @@
                         "position": {"x": 3.2, "y": 1.8, "z": -11.9},
                         "title" : "Ambulance",
                         "place" : "ambulance",
-                        "image" : "assets/images/Amblunace.jpg"
+                        "image" : "assets/images/Ambulance.jpg"
                     }
                 },
                 {
