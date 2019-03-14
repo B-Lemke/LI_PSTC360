@@ -9,6 +9,11 @@ AFRAME.registerComponent('homebutton', {
         var data = this.data;
         var el = this.el;
         
+
+
+
+
+
         //Create geometry for PLANE
         this.planeGeometry = new THREE.PlaneGeometry(2, 2, 2);
 

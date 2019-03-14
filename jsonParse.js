@@ -9,10 +9,17 @@ AFRAME.registerComponent("arena", {
 
     init: function(){
         var self = this;
+        
+        this.el.addEventListener('loadNewPlace', function(event){
+            self.loadPlace(event.detail.place);
+        });
+    
         console.log("Firing on the jsonParse.js file");
         new THREE.FileLoader().load(self.data.manifest, function(json){
            self.initManifest(JSON.parse(json)); 
         });
+
+
 
     },
     initManifest : function(manifest){
@@ -21,7 +28,21 @@ AFRAME.registerComponent("arena", {
     },
     loadPlace : function(place){
         
+        console.log("PLACE : " + place);
+
         var sceneEl = document.querySelector('a-scene');
+
+        /*
+        //clear previous locations from the scene
+        var locations = document.querySelectorAll("[location]");
+        locations.forEach(function(location){
+            location.parentNode.removeChild(location)
+        });
+        var homebuttons = document.querySelectorAll("[homebutton]");
+        homebuttons.forEach(function(btn){
+            btn.parentNode.removeChild(btn)
+        });
+        */
 
 
         if (place.video != null){
@@ -31,11 +52,17 @@ AFRAME.registerComponent("arena", {
                 if(videos[i].src == place.video){
 
                     this.data.videoSphere.setAttribute("src", "#" + videos[i].id);
+                    video = document.querySelector("#" + videos[i].id);
+                    video.currentTime = 0;
+                    video.play();
                 } else{
                     //Video not in assets
                     this.data.videoSphere.setAttribute("src", place.video);
                 }
+
             } 
+        }else{
+            console.log("Video null");
         }
         
 
@@ -48,14 +75,22 @@ AFRAME.registerComponent("arena", {
             thing = place.things[i];
             thingEntity = document.createElement('a-entity');
             
+
+
             if(thing.kind == "navigation"){
                 thingEntity.setAttribute("location", {
                     payload : JSON.stringify(thing.payload)
                 });
-            }  else{
+            } else if (this.kind =="home"){
+                thingEntity.setAttribute("homebutton", {
+                    "image": "#homeIcon"
+                });
+            } else{
                 console.log(thing.kind);
             }
             sceneEl.appendChild(thingEntity);
         }
     }
+
+
 })

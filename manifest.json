@@ -1,8 +1,6 @@
 {
     "places":{
         "home" : {
-            "image": "assets/images/forensics.jpg",
-            "video": "assets/video/Range1.mp4",
             "name": "Home",
             "things": [
                 {
@@ -74,38 +72,80 @@
         "forensics" : {
             "image": "assets/images/forensics.jpg",
             "video": "assets/video/forensics.mp4",
-            "name": "Forensics"
+            "name": "Forensics",
+            "things": [
+                {
+                    "kind": "home",
+                    "place": "home"
+                }
+            ]
         },
         "range1" :
         {
             "image": "assets/images/Range1.jpg",
             "video": "assets/video/Range1.mp4",
-            "name": "Range 1"
+            "name": "Range 1",
+            "things": [
+                {
+                    "kind": "home",
+                    "place": "home"
+                }
+            ]
         },
         "range2" :{
             "image": "assets/images/range2.jpg",
             "video": "assets/video/gunrange.mp4",
-            "name": "Range 2"
+            "name": "Range 2",
+            "things": [
+                {
+                    "kind": "home",
+                    "place": "home"
+                }
+            ]
         },
         "lobby" :{
             "image": "assets/images/lobby.jpg",
             "video": "assets/video/lobby.mp4",
-            "name": "Lobby"
+            "name": "Lobby",
+            "things": [
+                {
+                    "kind": "home",
+                    "place": "home"
+                }
+            ]
         },
         "ambulance" :{
             "image": "assets/images/Ambulance.jpg",
             "video": "assets/video/ambulance.mp4",
-            "name": "Ambulance"
+            "name": "Ambulance",
+            "things": [
+                {
+                    "kind": "home",
+                    "place": "home"
+                }
+            ]
         },
         "ems" :{
             "image": "assets/images/EMS_IV.jpg",
             "video": "assets/video/EMS_IV.mp4",
-            "name": "EMS"
+            "name": "EMS",
+            "things": [
+                {
+                    "kind": "home",
+                    "place": "home"
+                }
+            ]
         },
         "defib" :{
             "image": "assets/images/defibrillator.jpg",
             "video": "assets/video/defibrilllator.mp4",
-            "name": "Defib"
+            "name": "Defib",
+            "things": [
+                {
+                    "kind": "home",
+                    "place": "home"
+                }
+            ]
         }     
 
     },

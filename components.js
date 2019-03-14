@@ -26,7 +26,7 @@ AFRAME.registerComponent('location', {
     init: function () {
         var data = this.data;
         var payload = JSON.parse(this.data.payload);
-        var el = this.el;
+        var el = document.createElement('a-entity');
         var sceneEl = document.querySelector('a-scene');
 
 
@@ -46,7 +46,11 @@ AFRAME.registerComponent('location', {
         //rotate the sphere's mesh so the home symbol faces the camera. It must be converted from degrees to Radians
         //this.sphereMesh.rotation.y = (data.imageRotation * Math.PI) / 180;
 
+        el.setAttribute("class", "locationSphere");
+
         el.setObject3D('mesh', this.sphereMesh);
+        sceneEl.appendChild(el);
+
 
 
         //Plane and text
@@ -83,6 +87,8 @@ AFRAME.registerComponent('location', {
             "zOffset": 0.005,
         });
 
+
+
         sceneEl.appendChild(newPlane);
 
         newPlane.setAttribute("look-at", "#camera");
@@ -95,16 +101,18 @@ AFRAME.registerComponent('location', {
         //Event listener for interaction
         el.addEventListener('click', function (evt) {
 
+            
+
+            //Get the arena
+            var arena = document.querySelector("[arena]");
+            console.log(arena);
+
+            arena.emit("loadNewPlace", {place: payload.place});
+
             ////////Once any visible sphere has been clicked for a location, hide the spheres, planes and text
             //Check if the sphere is visible
             if (el.getAttribute('visible') == true) {
-                //Set the source of the videosphere and play it
-                videosphere.setAttribute('src', '#' + self.data.video360.id);
-
-                video = document.querySelector("#" + self.data.video360.id);
-                video.currentTime = 0;
-                video.play();
-
+                
 
                 //Get an array of all of the sphere and loop through them setting their visibility to false
                 var spheres = document.querySelectorAll(".locationSphere");
@@ -115,8 +123,6 @@ AFRAME.registerComponent('location', {
                 for (var i = 0; i < navPlanes.length; i++) {
                     navPlanes[i].setAttribute("visible", false);
                 }
-
-
 
                 //Any item with the fade-out attribute should run its fadeOutGo animation
                 fadeOutItems = document.querySelectorAll("[fade-out]");
