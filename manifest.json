@@ -72,6 +72,7 @@
         "forensics" : {
             "image": "assets/images/forensics.jpg",
             "video": "assets/video/forensics.mp4",
+            "videoRotation": 270,
             "name": "Forensics",
             "things": [
                 {
@@ -84,6 +85,7 @@
         {
             "image": "assets/images/Range1.jpg",
             "video": "assets/video/Range1.mp4",
+            "videoRotation": 270,
             "name": "Range 1",
             "things": [
                 {
@@ -95,6 +97,7 @@
         "range2" :{
             "image": "assets/images/range2.jpg",
             "video": "assets/video/gunrange.mp4",
+            "videoRotation": 270,
             "name": "Range 2",
             "things": [
                 {
@@ -106,6 +109,7 @@
         "lobby" :{
             "image": "assets/images/lobby.jpg",
             "video": "assets/video/lobby.mp4",
+            "videoRotation": 270,
             "name": "Lobby",
             "things": [
                 {
@@ -117,6 +121,7 @@
         "ambulance" :{
             "image": "assets/images/Ambulance.jpg",
             "video": "assets/video/ambulance.mp4",
+            "videoRotation": 270,
             "name": "Ambulance",
             "things": [
                 {
@@ -128,6 +133,7 @@
         "ems" :{
             "image": "assets/images/EMS_IV.jpg",
             "video": "assets/video/EMS_IV.mp4",
+            "videoRotation": 0,
             "name": "EMS",
             "things": [
                 {
@@ -139,6 +145,7 @@
         "defib" :{
             "image": "assets/images/defibrillator.jpg",
             "video": "assets/video/defibrillator.mp4",
+            "videoRotation": 300,
             "name": "Defib",
             "things": [
                 {

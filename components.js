@@ -15,12 +15,7 @@ AFRAME.registerComponent('location', {
     },
 
     /*
-    positionX, Y, and Z are used to position the Sphere in space on the plane
-    image360 is a map of the image that will be projected onto the sphere
-    imageRotation is the number of degrees to rotate the image on the sphere around the y axis.
-    video360 is a selector that points to the video that is loaded in the assets. This is the video that should be loaded and played once this sphere is clicked on
-    videoRotation can be used if the initial direction the viewer is looking it not ideal.
-    signText is the text that will appear below the sphere and infront of the plane. It should read the name of the location that will be visited
+        payload comes from a json file and contains the information needed to create a location sphere and its label
     */
 
     init: function () {
@@ -96,7 +91,7 @@ AFRAME.registerComponent('location', {
 
 
         var self = this;
-        var videosphere = document.querySelector('a-videosphere');
+        var videosphere = document.querySelector('#videoSphere');
 
         //Event listener for interaction
         el.addEventListener('click', function (evt) {
@@ -137,8 +132,6 @@ AFRAME.registerComponent('location', {
 
 
 
-                //Set the videosphere's rotation
-                videosphere.setAttribute("rotation", "0 " + data.videoRotation + " 0");
             }
 
         });

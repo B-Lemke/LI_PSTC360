@@ -9,11 +9,6 @@ AFRAME.registerComponent('homebutton', {
         var data = this.data;
         var el = this.el;
         
-
-
-
-
-
         //Create geometry for PLANE
         this.planeGeometry = new THREE.PlaneGeometry(2, 2, 2);
 
@@ -31,6 +26,7 @@ AFRAME.registerComponent('homebutton', {
 
         //Give the entity a class we can refer to it by later
         el.setAttribute("class", "homeNavigationPlane homebutton");       
+        el.setAttribute("position", "0 -2 -1"); 
 
         //Make this home button invisible on startup
         resetHomeScreen();

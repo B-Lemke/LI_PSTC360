@@ -73,6 +73,10 @@ AFRAME.registerComponent("arena", {
                     video.currentTime = 0;
                     video.play();
     
+
+                    //Set the videosphere's rotation because a lot of these videos are not facing the right way.
+                    videosphere.setAttribute("rotation", "0 " + place.videoRotation + " 0");
+
                 } 
             } 
 
