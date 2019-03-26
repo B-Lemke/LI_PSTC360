@@ -50,15 +50,22 @@ AFRAME.registerComponent('homebutton', {
                     navPlanes[i].setAttribute("visible", true);
                 }
 
-                //hHde the Home sphere and plane and text
+                //Hide the Home sphere and plane and text
                 resetHomeScreen();
                 
                 videoSphere = document.querySelector("#videoSphere");
                 
                 if (videoSphere != null) {
                     currentVideoId = videoSphere.getAttribute("src");
+                    
+                    if(currentVideoId[0] === "#"){
                     currentVideo = document.querySelector(currentVideoId);
                     currentVideo.pause();
+                    }
+                    else{
+                    //catch for videos set directly via source
+                    currentVideoId.pause();
+                    }
                 }
             }
 
@@ -81,9 +88,3 @@ function resetHomeScreen() {
     });
 }
 
-
-
-
-//Example entity:
-//
-//<a-entity class="homebutton" homebutton="image: #homeIcon;"></a-entity>

@@ -11,6 +11,8 @@ AFRAME.registerComponent("arena", {
         var self = this;
         var data = this.data;
 
+
+
         this.el.addEventListener('loadNewPlace', function(event){
             self.loadPlace(event.detail.place);
         });
@@ -18,7 +20,39 @@ AFRAME.registerComponent("arena", {
         new THREE.FileLoader().load(self.data.manifest, function(json){
            data.jsonparsed = (JSON.parse(json));
            self.initManifest(data.jsonparsed); 
+            
+            //Loop through the places in the json and preload the videos and images into assets
+            Object.keys(data.jsonparsed.places).forEach(function(key){
+
+                if(data.jsonparsed.places[key].video != null){
+                    var video = document.createElement('video');
+                    video.setAttribute('id', data.jsonparsed.places[key].name + "VideoId");
+                    video.setAttribute('loop', true);
+                    video.setAttribute('style', 'display: none;');
+                    video.setAttribute('crossorigin', 'anonymous');
+                    video.setAttribute('playsinline', true);
+                    video.setAttribute('webkit-playsinline', true);
+                    video.setAttribute('src', data.jsonparsed.places[key].video);    
+
+                    var assets = document.querySelector("a-assets");
+                    assets.appendChild(video);
+                }
+
+                
+                if(data.jsonparsed.places[key].image != null){
+                    var image = document.createElement('img');
+                    image.setAttribute('id', data.jsonparsed.places[key].name + "ImageId");
+                    image.setAttribute('crossorigin', 'anonymous');
+                    image.setAttribute('src', data.jsonparsed.places[key].image);    
+
+                    var assets = document.querySelector("a-assets");
+                    assets.appendChild(image);
+                }
+            });
+            
         });
+
+
 
     },
 
@@ -41,17 +75,14 @@ AFRAME.registerComponent("arena", {
  
         var sceneEl = document.querySelector('a-scene');
 
-        /*
+      
         //clear previous locations from the scene
         var locations = document.querySelectorAll("[location]");
         locations.forEach(function(location){
             location.parentNode.removeChild(location)
         });
-        var homebuttons = document.querySelectorAll("[homebutton]");
-        homebuttons.forEach(function(btn){
-            btn.parentNode.removeChild(btn)
-        });
-        */
+
+ 
 
 
         if (place.video != null){
@@ -59,27 +90,26 @@ AFRAME.registerComponent("arena", {
             var videos = document.querySelectorAll("video");
             var videosphere = document.querySelector("#videoSphere");
             console.log(videos);
-
+            
+            var videoFound = false;
 
             for (var i = 0; i < videos.length; i++) {
                 if(videos[i].src == window.location.origin + "/" +  place.video){
-                    console.log("This is the video that matches");
-                    console.log("#" + videos[i].id);
+
                     videosphere.setAttribute('src', '#' + videos[i].id);
                     video = document.querySelector("#" + videos[i].id);
-                    console.log(video);
-       
-                    console.log(videosphere);
+
                     video.currentTime = 0;
                     video.play();
-    
 
-                    //Set the videosphere's rotation because a lot of these videos are not facing the right way.
-                    videosphere.setAttribute("rotation", "0 " + place.videoRotation + " 0");
-
+                    videoFound = true;
                 } 
             } 
-
+            if(!videoFound){
+                //videosphere.setAttribute('src', place.video);
+            }
+            //Set the videosphere's rotation because a lot of these videos are not facing the right way.
+            videosphere.setAttribute("rotation", "0 " + place.videoRotation + " 0");
 
         }else{
             console.log("Video null");

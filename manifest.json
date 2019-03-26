@@ -2,6 +2,8 @@
     "places":{
         "home" : {
             "name": "Home",
+            "image": null,
+            "video": null,
             "things": [
                 {
                     "kind": "navigation",
@@ -86,7 +88,7 @@
             "image": "assets/images/Range1.jpg",
             "video": "assets/video/Range1.mp4",
             "videoRotation": 270,
-            "name": "Range 1",
+            "name": "Range1",
             "things": [
                 {
                     "kind": "home",
@@ -98,7 +100,7 @@
             "image": "assets/images/range2.jpg",
             "video": "assets/video/gunrange.mp4",
             "videoRotation": 270,
-            "name": "Range 2",
+            "name": "Range2",
             "things": [
                 {
                     "kind": "home",
