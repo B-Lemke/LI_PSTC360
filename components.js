@@ -105,8 +105,8 @@ AFRAME.registerComponent('location', {
 
             //Get the arena
             var arena = document.querySelector("[arena]");
-            console.log(arena);
-
+            console.log("Arena: " + arena);
+                
             arena.emit("loadNewPlace", {place: payload.place});
 
             ////////Once any visible sphere has been clicked for a location, hide the spheres, planes and text

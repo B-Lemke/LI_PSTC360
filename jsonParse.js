@@ -9,27 +9,36 @@ AFRAME.registerComponent("arena", {
 
     init: function(){
         var self = this;
-        
+        var data = this.data;
+
         this.el.addEventListener('loadNewPlace', function(event){
             self.loadPlace(event.detail.place);
         });
     
-        console.log("Firing on the jsonParse.js file");
         new THREE.FileLoader().load(self.data.manifest, function(json){
-           self.initManifest(JSON.parse(json)); 
+           data.jsonparsed = (JSON.parse(json));
+           self.initManifest(data.jsonparsed); 
         });
 
-
-
     },
+
     initManifest : function(manifest){
         var startPlace = manifest.places[manifest.startPlace];
         this.loadPlace(startPlace);
     },
-    loadPlace : function(place){
-        
-        console.log("PLACE : " + place);
 
+    loadPlace : function(place){
+        var data = this.data;
+        console.log("Place:")
+        console.log(place);
+    
+        if(typeof place == "string"){
+            console.log("Place is a string");
+            place = data.jsonparsed.places[place];
+            console.log("New parsed place?");
+            console.log(place);
+        }
+ 
         var sceneEl = document.querySelector('a-scene');
 
         /*
@@ -48,19 +57,26 @@ AFRAME.registerComponent("arena", {
         if (place.video != null){
             //Find the asset that matches the video
             var videos = document.querySelectorAll("video");
-            for (var i = 0; i < videos.length; i++) {
-                if(videos[i].src == place.video){
+            var videosphere = document.querySelector("#videoSphere");
+            console.log(videos);
 
-                    this.data.videoSphere.setAttribute("src", "#" + videos[i].id);
+
+            for (var i = 0; i < videos.length; i++) {
+                if(videos[i].src == window.location.origin + "/" +  place.video){
+                    console.log("This is the video that matches");
+                    console.log("#" + videos[i].id);
+                    videosphere.setAttribute('src', '#' + videos[i].id);
                     video = document.querySelector("#" + videos[i].id);
+                    console.log(video);
+       
+                    console.log(videosphere);
                     video.currentTime = 0;
                     video.play();
-                } else{
-                    //Video not in assets
-                    this.data.videoSphere.setAttribute("src", place.video);
-                }
-
+    
+                } 
             } 
+
+
         }else{
             console.log("Video null");
         }
