@@ -18,7 +18,7 @@
       <!--Asset Loading-->
       <a-assets timeout="30000">
 
-        <img id ="homeIcon" crossorigin="anonymous" src="assets/images/icons/home_dark.png" />
+        <img id ="homeIcon" crossorigin="anonymous" src="assets/images/icons/HomeIconRound.png" />
       </a-assets>
 
 
@@ -36,10 +36,9 @@
       <a-entity id="welcomeMsg" text="value: Welcome; height: 50; width: 30; color: #eeede8" position="12 6 -12.5" fade-in fade-out></a-entity>
       <a-entity id="welcomeSelect" text="value: Please select a scene to view!; height: 50; width: 30; color: #eeede8" position="6 4 -11" fade-in fade-out></a-entity>
       <a-entity id="turnAroundMsg" text="value: Turn Around!; height: 50; width: 30; color: #eeede8" position="-11 3.5 7" rotation="0 180 0" fade-in fade-out></a-entity>
-
-
       
-      <a-entity class="homebutton" homebutton="image: #homeIcon;"></a-entity>
+      
+      <a-plane class="homebutton" homebutton="image: #homeIcon;" material="transparent:true; opacity:0.9" ></a-plane>
 
       <!--Home background-->
       <a-plane rotation="-90 0 0" material="color:#b5af9b" scale="2.5 1.5 1" height="30" width="30" id="ground" fade-in fade-out></a-plane>

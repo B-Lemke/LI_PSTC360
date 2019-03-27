@@ -9,30 +9,21 @@ AFRAME.registerComponent('homebutton', {
         var data = this.data;
         var el = this.el;
         
-        //Create geometry for PLANE
-        this.planeGeometry = new THREE.PlaneGeometry(2, 2, 2);
+  
+        el.setAttribute('scale', '2 2 2');
+        el.setAttribute('rotation', '270 0 0');
+        el.setAttribute('material', 'src: ' + data.image.src);
 
-        //Create material for plane
-        this.texture = new THREE.TextureLoader().load(data.image.src);
-        this.planeMaterial = new THREE.MeshStandardMaterial({ map: this.texture });
-
-        //Create mesh for plane
-        this.planeMesh = new THREE.Mesh(this.planeGeometry, this.planeMaterial);
-
-        el.setObject3D('mesh', this.planeMesh);
-
-        el.getObject3D('mesh').position = new THREE.Vector3( 0, 0, 0);
-        el.getObject3D('mesh').rotation.x = -Math.PI / 2;
 
         //Give the entity a class we can refer to it by later
-        el.setAttribute("class", "homeNavigationPlane homebutton");       
+        el.setAttribute("class", "homeNavigationPlane homebutton"); 
         el.setAttribute("position", "0 -2 -1"); 
 
         //Make this home button invisible on startup
         resetHomeScreen();
 
         navPlaneEl = document.querySelector(".homeNavigationPlane");
-
+  
         //Event listeners for interaction
         el.addEventListener('click', function (evt) {
 

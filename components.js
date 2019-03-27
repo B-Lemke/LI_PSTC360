@@ -96,13 +96,15 @@ AFRAME.registerComponent('location', {
         //Event listener for interaction
         el.addEventListener('click', function (evt) {
 
+            if(el.getAttribute("visible") == true){
+                 //Get the arena
+                var arena = document.querySelector("[arena]");
+
+                    
+                arena.emit("loadNewPlace", {place: payload.place});
             
 
-            //Get the arena
-            var arena = document.querySelector("[arena]");
-            console.log("Arena: " + arena);
-                
-            arena.emit("loadNewPlace", {place: payload.place});
+
 
             ////////Once any visible sphere has been clicked for a location, hide the spheres, planes and text
             //Check if the sphere is visible
@@ -121,16 +123,16 @@ AFRAME.registerComponent('location', {
 
                 //Any item with the fade-out attribute should run its fadeOutGo animation
                 fadeOutItems = document.querySelectorAll("[fade-out]");
-                fadeOutItems.forEach(function(fadeItem){
-                    fadeItem.emit('fadeOutGo');
-                });
+                    fadeOutItems.forEach(function(fadeItem){
+                        fadeItem.emit('fadeOutGo');
+                    });
 
 
                 //Make the home button and label visisble
-                var homebuttonPlane = document.querySelector(".homeNavigationPlane");
-                homebuttonPlane.setAttribute("visible", true);
+                  var homebuttonPlane = document.querySelector(".homeNavigationPlane");
+                    homebuttonPlane.setAttribute("visible", true);
 
-
+                }
 
             }
 

@@ -94,7 +94,7 @@ AFRAME.registerComponent("arena", {
             var videoFound = false;
 
             for (var i = 0; i < videos.length; i++) {
-                if(videos[i].src == window.location.origin + "/" +  place.video){
+                if(videos[i].src.endsWith(place.video)){
 
                     videosphere.setAttribute('src', '#' + videos[i].id);
                     video = document.querySelector("#" + videos[i].id);
