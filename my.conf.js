@@ -1,5 +1,7 @@
 // Karma configuration
 // Generated on Thu Apr 18 2019 11:50:22 GMT-0500 (Central Daylight Time)
+require('karma-jasmine-html-reporter'),
+
 
 module.exports = function(config) {
   config.set({
@@ -34,7 +36,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['kjhtml'],
 
 
     // web server port
@@ -56,7 +58,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
