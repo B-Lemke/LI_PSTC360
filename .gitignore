@@ -1,1 +1,2 @@
 #Ignore files that are too big to go on GitHub
+node_modules
